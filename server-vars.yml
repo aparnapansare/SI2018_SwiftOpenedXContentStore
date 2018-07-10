@@ -1,0 +1,38 @@
+EDXAPP_SETTINGS: "openstack"
+VHOST_NAME: "openstack"
+EDXAPP_SWIFT_USERNAME: "openedx"
+EDXAPP_SWIFT_KEY: "openedx"
+EDXAPP_SWIFT_TENANT_ID: "081223a854f54e37a0d6a1c383c5577e"
+EDXAPP_SWIFT_TENANT_NAME: "openedx"
+EDXAPP_SWIFT_AUTH_URL: "http://10.129.103.86:5000/v3/auth/tokens"
+EDXAPP_SWIFT_AUTH_VERSION: 3
+EDXAPP_SWIFT_USER_DOMAIN_NAME: "default"
+EDXAPP_SWIFT_USER_DOMAIN_ID: "b72bcb41252442069816707942b402b5"
+EDXAPP_SWIFT_REGION_NAME: "RegionOne"
+EDXAPP_FILE_UPLOAD_STORAGE_BUCKET_NAME: "container1"
+EDXAPP_GRADE_STORAGE_CLASS: 'swift.storage.SwiftStorage'
+EDXAPP_GRADE_STORAGE_KWARGS:
+  name_prefix: "grades/"
+ENABLE_GRADE_DOWNLOADS: true
+edxapp_user: "edxapp"
+edxapp_app_dir: "/edx/app/edxapp"
+COMMON_PIP_VERBOSITY: ''
+COMMON_PYPI_MIRROR_URL: 'https://pypi.python.org/simple'
+edxapp_venv_dir: "/edx/app/edxapp/venvs/edxapp"
+edxapp_venv_bin: "{{ edxapp_venv_dir }}/bin"
+edxapp_node_bin: "{{ edxapp_code_dir }}/node_modules/.bin"
+edxapp_nodeenv_dir: "{{ edxapp_app_dir }}/nodeenvs/edxapp"
+edxapp_nodeenv_bin: "{{ edxapp_nodeenv_dir }}/bin"
+edxapp_environment:
+  LANG: "en_US.UTF-8"
+  NO_PREREQ_INSTALL: 1
+  SKIP_WS_MIGRATIONS: 1
+  PATH: "{{ edxapp_venv_bin }}:{{ edxapp_code_dir }}/bin:{{ edxapp_node_bin }}:{{ edxapp_nodeenv_bin }}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  # the settings module for edxapp, DJANGO_SETTINGS_MODULE
+  # should be set to {{SERVICE_VARIANT}}.{{EDXAPP_SETTINGS}}
+  # where SERVICE_VARIANT is lms or cms
+  EDX_PLATFORM_SETTINGS: 'aws'
+  # Current set to the app dir for json config, this should
+  # be updated to /edx/etc/edxapp when the switch to
+  # yaml based configs is complete
+  CONFIG_ROOT: "{{ edxapp_app_dir }}"
